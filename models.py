@@ -1,18 +1,19 @@
 from datetime import now
 
 class Person:
-	def __init__(self, name):
+	def __init__(self, name, email):
 		self.name = name
+		self.email = email
 
 class Employee(Person):
-	def __init__(self, name, employee_number):
+	def __init__(self, name, email, employee_number):
+		super(Employee, self).__init__(name, email)
 		self.employee_number = employee_number
-		super(Employee, self).__init__(name)
 
 class Client(Person):
-	def __init__(self, name, client_number):
+	def __init__(self, name, email, client_number):
+		super(Client, self).__init__(name, email)
 		self.client_number = client_number
-		super(Client, self).__init__(name)
 
 class Category:
 	def __init__(self, category_name):
@@ -30,10 +31,11 @@ class Stock:
 		self.product_stock = n_product_stock
 
 class Sales:
-	def __init__(self, sold_item: Product, seller, buyer: Client, sale_date = now()):
+	def __init__(self, sold_item: Product, seller, buyer: Client, n_sold_items, sale_date = now()):
 		self.product = sold_item
 		self.seller = seller
 		self.buyer = buyer
+		self.n_sold_items = n_sold_items
 		self.sale_date = sale_date
 
 
