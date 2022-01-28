@@ -8,7 +8,6 @@ def generate_number(param):
 	else:
 		return randint(10_000, 50_000)
 
-
 class DaoClient:
 					
 	@classmethod
@@ -31,7 +30,6 @@ class DaoClient:
 				client_data.append(Client(client[0], client[1], client[2]))
 
 			return client_data	
-
 
 class DaoEmployee:
 
@@ -56,10 +54,60 @@ class DaoEmployee:
 
 			return employees
 
-DaoClient.save(Client("Conor", "conor@gmail.com", generate_number("client")))
-DaoClient.save(Client("John", "john@gmail.com", generate_number("client")))
-DaoClient.save(Client("Mary", "mary@gmail.com", generate_number("client")))
+class DaoCategory:
+	
+	@classmethod
+	def save(cls, category: Category):
+		with open("categories.txt", "a") as f:
+			f.writelines(f"{category.name}\n")
 
-DaoEmployee.save(Employee("Conor", "conor@gmail.com", generate_number("employee")))
-DaoEmployee.save(Employee("John", "john@gmail.com", generate_number("employee")))
-DaoEmployee.save(Employee("Mary", "mary@gmail.com", generate_number("employee")))
+	@classmethod
+	def read(cls):
+		with open("categories.txt", "r") as f:
+			cls.categories = f.readlines()
+			cls.categories = list(map(lambda x: x.replace('\n', ''), cls.categories))
+			
+			categories = []
+
+			for category in cls.categories:
+				categories.append(Category(category))
+
+			return categories
+
+class DaoSales:
+
+	@classmethod
+	def save(cls, sale: Sales):
+		with open("sales.txt", "a") as f:
+			f.writelines(f"{sale.sold_item.product_name} | "
+						 f"{sale.sold_item.product_price} | "
+						 f"{sale.sold_item.product_category} | "
+						 f"{sale.seller.name} | "
+						 f"{sale.buyer.name} | "
+						 f"{sale.n_sold_items} | "
+						 f"{sale.sale_date}\n"
+						 )
+
+	@classmethod
+	def read(cls):
+		with open("sales.txt", "r") as f:
+			cls.sales_data = f.readlines()
+			cls.sales_data = list(map(lambda x: x.replace('\n', ''), cls.sales_data))
+			cls.sales_data = list(map(lambda x: x.split(' | '), cls.sales_data))
+
+			sales = []
+
+			for sale in cls.sales_data:
+				sales.append(sale)
+
+			return sales
+
+client = Client('Aishling', 'aishling@gmail.com', generate_number("client"))
+employee = Employee('Conor', 'conor@gmail.com', generate_number("employee"))
+product = Product('Macbook Pro', 1299.99, 'Electronics')
+sale = Sales(product, employee, client, 1)
+
+DaoSales.save(sale)
+DaoSales.read()
+# DaoSales.save(Sales('Iphone 13', 'Emidio', 'Aishling', 1))
+# DaoSales.save(Sales('Laptop', 'Mark', 'Aishling', 5))
