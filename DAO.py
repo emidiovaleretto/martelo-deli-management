@@ -105,9 +105,7 @@ class DaoSales:
 client = Client('Aishling', 'aishling@gmail.com', generate_number("client"))
 employee = Employee('Conor', 'conor@gmail.com', generate_number("employee"))
 product = Product('Macbook Pro', 1299.99, 'Electronics')
-sale = Sales(product, employee, client, 1)
+sale = Sales(product, employee, client, 1, sale_date="22/12/2019")
 
 DaoSales.save(sale)
 DaoSales.read()
-# DaoSales.save(Sales('Iphone 13', 'Emidio', 'Aishling', 1))
-# DaoSales.save(Sales('Laptop', 'Mark', 'Aishling', 5))
