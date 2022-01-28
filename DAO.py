@@ -1,9 +1,12 @@
 from models import *
 from random import randint
 
-def generate_number():
+def generate_number(param):
 	''' Generates a random number between 10.000 and 50.000 '''
-	return randint(10_000, 50_000)
+	if param == "client":
+		return randint(10_00, 50_00)
+	else:
+		return randint(10_000, 50_000)
 
 
 class DaoClient:
@@ -29,6 +32,34 @@ class DaoClient:
 
 			return client_data	
 
-DaoClient.save(Client("Conor", "conor@gmail.com", generate_number()))
-DaoClient.save(Client("Aoife", "aoife@gmail.com", generate_number()))
-DaoClient.save(Client("Clare", "clare@gmail.com", generate_number()))
+
+class DaoEmployee:
+
+	@classmethod
+	def save(cls, employee: Employee):
+		with open("employees.txt", "a") as f:
+			f.writelines(f"{employee.name} | "
+						 f"{employee.email} | "
+						 f"{employee.employee_number}\n")
+
+	@classmethod
+	def read(cls):
+		with open("employees.txt", "r") as f:
+			cls.employees = f.readlines()
+			cls.employees = list(map(lambda x: x.replace('\n', ''), cls.employees))
+			cls.employees = list(map(lambda x: x.split(' | '), cls.employees))
+		
+			employees = []
+
+			for employee in cls.employees:
+				employees.append(Employee(employee[0], employee[1], employee[2]))
+
+			return employees
+
+DaoClient.save(Client("Conor", "conor@gmail.com", generate_number("client")))
+DaoClient.save(Client("John", "john@gmail.com", generate_number("client")))
+DaoClient.save(Client("Mary", "mary@gmail.com", generate_number("client")))
+
+DaoEmployee.save(Employee("Conor", "conor@gmail.com", generate_number("employee")))
+DaoEmployee.save(Employee("John", "john@gmail.com", generate_number("employee")))
+DaoEmployee.save(Employee("Mary", "mary@gmail.com", generate_number("employee")))
