@@ -1,4 +1,4 @@
-from datetime import now
+from datetime import datetime
 
 class Person:
 	def __init__(self, name, email):
@@ -31,7 +31,7 @@ class Stock:
 		self.product_stock = n_product_stock
 
 class Sales:
-	def __init__(self, sold_item: Product, seller, buyer: Client, n_sold_items, sale_date = now()):
+	def __init__(self, sold_item: Product, seller, buyer: Client, n_sold_items, sale_date = datetime.now()):
 		self.product = sold_item
 		self.seller = seller
 		self.buyer = buyer
