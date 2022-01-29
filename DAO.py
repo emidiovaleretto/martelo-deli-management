@@ -5,7 +5,7 @@ def generate_number(param):
 	''' Generates a random number between 
 		1.000 and 5.000 for Client instances and
 		10.000 and 50.000 for Employee instances. '''
-		
+
 	if param == "client":
 		return randint(1_000, 5_000)
 	else:
@@ -24,15 +24,12 @@ class DaoClient:
 	def read(cls):
 		with open("clients.txt", "r") as f:
 			cls.client_data = f.readlines()
-			cls.client_data = list(map(lambda x: x.replace('\n', ''), cls.client_data))
-			cls.client_data = list(map(lambda x: x.split(' | '), cls.client_data))
-			
-			client_data = []
+		cls.client_data = list(map(lambda x: x.replace('\n', ''), cls.client_data))
+		cls.client_data = list(map(lambda x: x.split(' | '), cls.client_data))
+		
+		client_data = [client for client in cls.client_data]
 
-			for client in cls.client_data:
-				client_data.append(Client(client[0], client[1], client[2]))
-
-			return client_data	
+		return client_data	
 
 class DaoEmployee:
 
@@ -47,15 +44,12 @@ class DaoEmployee:
 	def read(cls):
 		with open("employees.txt", "r") as f:
 			cls.employees = f.readlines()
-			cls.employees = list(map(lambda x: x.replace('\n', ''), cls.employees))
-			cls.employees = list(map(lambda x: x.split(' | '), cls.employees))
-		
-			employees = []
+		cls.employees = list(map(lambda x: x.replace('\n', ''), cls.employees))
+		cls.employees = list(map(lambda x: x.split(' | '), cls.employees))
+	
+		employees = [employee for employee in cls.employees]
 
-			for employee in cls.employees:
-				employees.append(Employee(employee[0], employee[1], employee[2]))
-
-			return employees
+		return employees
 
 class DaoCategory:
 	
@@ -68,14 +62,12 @@ class DaoCategory:
 	def read(cls):
 		with open("categories.txt", "r") as f:
 			cls.categories = f.readlines()
-			cls.categories = list(map(lambda x: x.replace('\n', ''), cls.categories))
-			
-			categories = []
 
-			for category in cls.categories:
-				categories.append(Category(category))
+		cls.categories = list(map(lambda x: x.replace('\n', ''), cls.categories))
+				
+		categories = [category for category in cls.categories]
 
-			return categories
+		return categories
 
 class DaoSales:
 
@@ -95,15 +87,13 @@ class DaoSales:
 	def read(cls):
 		with open("sales.txt", "r") as f:
 			cls.sales_data = f.readlines()
-			cls.sales_data = list(map(lambda x: x.replace('\n', ''), cls.sales_data))
-			cls.sales_data = list(map(lambda x: x.split(' | '), cls.sales_data))
 
-			sales = []
+		cls.sales_data = list(map(lambda x: x.replace('\n', ''), cls.sales_data))
+		cls.sales_data = list(map(lambda x: x.split(' | '), cls.sales_data))
 
-			for sale in cls.sales_data:
-				sales.append(sale)
+		sales = [sale for sale in cls.sales_data]
 
-			return sales
+		return sales
 
 class DaoStock:
 
@@ -119,12 +109,10 @@ class DaoStock:
 	def read(cls):
 		with open("stock.txt", "r") as f:
 			cls.stock = f.readlines()
-			cls.stock = list(map(lambda x: x.replace('\n', ''), cls.stock))
-			cls.stock = list(map(lambda x: x.split(' | '), cls.stock))
 
-			stock = []
+		cls.stock = list(map(lambda x: x.replace('\n', ''), cls.stock))
+		cls.stock = list(map(lambda x: x.split(' | '), cls.stock))
 
-			for item in cls.stock:
-				stock.append(item)
+		stock = [item for item in cls.stock if len(cls.stock) > 0]
 
-			return stock
+		return stock
