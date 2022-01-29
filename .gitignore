@@ -125,3 +125,9 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+# Editor config
+.editorconfig
+
+# txt files
+*.txt
