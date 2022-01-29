@@ -2,9 +2,12 @@ from models import *
 from random import randint
 
 def generate_number(param):
-	''' Generates a random number between 10.000 and 50.000 '''
+	''' Generates a random number between 
+		1.000 and 5.000 for Client instances and
+		10.000 and 50.000 for Employee instances. '''
+		
 	if param == "client":
-		return randint(10_00, 50_00)
+		return randint(1_000, 5_000)
 	else:
 		return randint(10_000, 50_000)
 
@@ -125,19 +128,3 @@ class DaoStock:
 				stock.append(item)
 
 			return stock
-
-
-# client = Client('Peter', 'peter@gmail.com', generate_number("client"))
-# employee = Employee('Michael', 'michael@gmail.com', generate_number("employee"))
-# product = Product('Iphone', 4299.99, 'Electronics')
-# sale = Sales(product, employee, client, 1, sale_date="22/12/2019")
-# sale = Sales(product, employee, client, 1, sale_date="13/05/2018")
-
-# DaoSales.save(sale)
-# print(DaoSales.read())
-
-product = Product('Monitor', 299.99, 'Electronics')
-
-stock = Stock(product, n_product_stock=10)
-DaoStock.save(stock)
-print(DaoStock.read())
