@@ -102,10 +102,42 @@ class DaoSales:
 
 			return sales
 
-client = Client('Aishling', 'aishling@gmail.com', generate_number("client"))
-employee = Employee('Conor', 'conor@gmail.com', generate_number("employee"))
-product = Product('Macbook Pro', 1299.99, 'Electronics')
-sale = Sales(product, employee, client, 1, sale_date="22/12/2019")
+class DaoStock:
 
-DaoSales.save(sale)
-DaoSales.read()
+	@classmethod
+	def save(cls, product: Product):
+		with open("stock.txt", "a") as f:
+			f.writelines(f"{product.product.product_name} | "
+						 f"{product.product.product_price} | "
+						 f"{product.product.product_category} | "
+						 f"In Stock: {product.product_stock}\n")
+
+	@classmethod
+	def read(cls):
+		with open("stock.txt", "r") as f:
+			cls.stock = f.readlines()
+			cls.stock = list(map(lambda x: x.replace('\n', ''), cls.stock))
+			cls.stock = list(map(lambda x: x.split(' | '), cls.stock))
+
+			stock = []
+
+			for item in cls.stock:
+				stock.append(item)
+
+			return stock
+
+
+# client = Client('Peter', 'peter@gmail.com', generate_number("client"))
+# employee = Employee('Michael', 'michael@gmail.com', generate_number("employee"))
+# product = Product('Iphone', 4299.99, 'Electronics')
+# sale = Sales(product, employee, client, 1, sale_date="22/12/2019")
+# sale = Sales(product, employee, client, 1, sale_date="13/05/2018")
+
+# DaoSales.save(sale)
+# print(DaoSales.read())
+
+product = Product('Monitor', 299.99, 'Electronics')
+
+stock = Stock(product, n_product_stock=10)
+DaoStock.save(stock)
+print(DaoStock.read())
