@@ -21,7 +21,7 @@ class DaoClient:
 						 f"{client.client_number}\n")
 
 	@classmethod
-	def read(cls):
+	def read(cls, client: Client):
 		with open("clients.txt", "r") as f:
 			cls.client_data = f.readlines()
 		cls.client_data = list(map(lambda x: x.replace('\n', ''), cls.client_data))
@@ -41,7 +41,7 @@ class DaoEmployee:
 						 f"{employee.employee_number}\n")
 
 	@classmethod
-	def read(cls):
+	def read(cls, employee: Employee):
 		with open("employees.txt", "r") as f:
 			cls.employees = f.readlines()
 		cls.employees = list(map(lambda x: x.replace('\n', ''), cls.employees))
@@ -59,7 +59,7 @@ class DaoCategory:
 			f.writelines(f"{category.name}\n")
 
 	@classmethod
-	def read(cls):
+	def read(cls, category: Category):
 		with open("categories.txt", "r") as f:
 			cls.categories = f.readlines()
 
@@ -84,7 +84,7 @@ class DaoSales:
 						 )
 
 	@classmethod
-	def read(cls):
+	def read(cls, sale: Sales):
 		with open("sales.txt", "r") as f:
 			cls.sales_data = f.readlines()
 
@@ -106,7 +106,7 @@ class DaoStock:
 						 f"In Stock: {product.product_stock}\n")
 
 	@classmethod
-	def read(cls):
+	def read(cls, product: Product):
 		with open("stock.txt", "r") as f:
 			cls.stock = f.readlines()
 
