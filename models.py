@@ -31,7 +31,8 @@ class Stock:
 		self.product_stock = n_product_stock
 
 class Sales:
-	def __init__(self, sold_item: Product, seller: Employee, buyer: Client, n_sold_items, sale_date = datetime.now().strftime("%d/%m/%Y")):
+	def __init__(self, sale_id, sold_item: Product, seller: Employee, buyer: Client, n_sold_items, sale_date = datetime.now().strftime("%d/%m/%Y")):
+		self.sale_id = sale_id
 		self.sold_item = sold_item
 		self.seller = seller
 		self.buyer = buyer
