@@ -3,7 +3,7 @@ from models import Product, Category, Client, Employee, Sales, Stock
 
 class ControllerCategory:
 
-	def register_new_category(self, category):
+	def register_new_category(category):
 
 		''' This method will register a new category in the system 
 			and will save it in the categories.txt file. '''
@@ -23,7 +23,7 @@ class ControllerCategory:
 			print("Category already exists!")
 
 
-	def remove_category(self, category_to_remove):
+	def remove_category(category_to_remove):
 
 		''' This method will remove a category from the system 
 			and will remove it from the categories.txt file. '''
