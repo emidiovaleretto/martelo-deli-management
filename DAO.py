@@ -17,7 +17,7 @@ class DaoClient:
 		cls.client_data = list(map(lambda x: x.replace('\n', ''), cls.client_data))
 		cls.client_data = list(map(lambda x: x.split(' | '), cls.client_data))
 		
-		client_data = [client for client in cls.client_data]
+		client_data = [Client(client) for client in cls.client_data]
 
 		return client_data	
 
@@ -37,7 +37,7 @@ class DaoEmployee:
 		cls.employees = list(map(lambda x: x.replace('\n', ''), cls.employees))
 		cls.employees = list(map(lambda x: x.split(' | '), cls.employees))
 	
-		employees = [employee for employee in cls.employees]
+		employees = [Employee(employee) for employee in cls.employees]
 
 		return employees
 
@@ -55,7 +55,7 @@ class DaoCategory:
 
 		cls.categories = list(map(lambda x: x.replace('\n', ''), cls.categories))
 				
-		categories = [category for category in cls.categories]
+		categories = [Category(category) for category in cls.categories]
 
 		return categories
 
@@ -82,7 +82,7 @@ class DaoSales:
 		cls.sales_data = list(map(lambda x: x.replace('\n', ''), cls.sales_data))
 		cls.sales_data = list(map(lambda x: x.split(' | '), cls.sales_data))
 
-		sales = [sale for sale in cls.sales_data]
+		sales = [Sales(sale) for sale in cls.sales_data]
 
 		return sales
 
@@ -104,6 +104,6 @@ class DaoStock:
 		cls.stock = list(map(lambda x: x.replace('\n', ''), cls.stock))
 		cls.stock = list(map(lambda x: x.split(' | '), cls.stock))
 
-		stock = [item for item in cls.stock if len(cls.stock) > 0]
+		stock = [Stock(item) for item in cls.stock if len(cls.stock) > 0]
 
 		return stock

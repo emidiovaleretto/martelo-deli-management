@@ -22,26 +22,24 @@ class ControllerCategory:
 		else:
 			print("Category already exists!")
 
+
 	def remove_category(self, category_to_remove):
 
 		''' This method will remove a category from the system 
 			and will remove it from the categories.txt file. '''
 
 		data = DaoCategory.read()
-		categories = filter(lambda x: x.category == category_to_remove, data)
+		categories = list(filter(lambda x: x.category_name == category_to_remove, data))
 
-		if len(categories) == 0:
+		if len(categories) <= 0:
 			print("Category not found!")
 		else:	
-			for i in range(len(categories)):
-				if categories[i] == category_to_remove:
-					del categories[i]
+			for i in range(len(data)):
+				if data[i].category_name == category_to_remove:
+					del data[i]
 					break
-				print("Removed category successfully!")
+			print("Removed category successfully!")
 
 			with open("categories.txt", "w") as f:
 				for i in data:
-					f.writelines(f"{i.category}\n")
-
-
-
+					f.writelines(f"{i.category_name}\n")
