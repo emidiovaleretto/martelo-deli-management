@@ -64,7 +64,8 @@ class DaoSales:
 	@classmethod
 	def save(cls, sale: Sales):
 		with open("sales.txt", "a") as f:
-			f.writelines(f"{sale.sold_item.product_name} | "
+			f.writelines(f"{sale.sale_id} | "
+						 f"{sale.sold_item.product_name} | "
 						 f"{sale.sold_item.product_price} | "
 						 f"{sale.sold_item.product_category} | "
 						 f"{sale.seller.name} | "
@@ -74,7 +75,7 @@ class DaoSales:
 						 )
 
 	@classmethod
-	def read(cls, sale: Sales):
+	def read(cls):
 		with open("sales.txt", "r") as f:
 			cls.sales_data = f.readlines()
 
