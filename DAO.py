@@ -1,15 +1,5 @@
 from models import *
-from random import randint
 
-def generate_number(param):
-	''' Generates a random number between 
-		1.000 and 5.000 for Client instances and
-		10.000 and 50.000 for Employee instances. '''
-
-	if param == "client":
-		return randint(1_000, 5_000)
-	else:
-		return randint(10_000, 50_000)
 
 class DaoClient:
 					
@@ -21,7 +11,7 @@ class DaoClient:
 						 f"{client.client_number}\n")
 
 	@classmethod
-	def read(cls, client: Client):
+	def read(cls):
 		with open("clients.txt", "r") as f:
 			cls.client_data = f.readlines()
 		cls.client_data = list(map(lambda x: x.replace('\n', ''), cls.client_data))
@@ -56,10 +46,10 @@ class DaoCategory:
 	@classmethod
 	def save(cls, category: Category):
 		with open("categories.txt", "a") as f:
-			f.writelines(f"{category.name}\n")
+			f.writelines(f"{category}\n")
 
 	@classmethod
-	def read(cls, category: Category):
+	def read(cls):
 		with open("categories.txt", "r") as f:
 			cls.categories = f.readlines()
 
