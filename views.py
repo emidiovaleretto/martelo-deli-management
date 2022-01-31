@@ -1,4 +1,13 @@
+from os import path
 from utilities.category import category
+
+def create_file(*filename):
+	for name in filename:
+		if not path.exists(name):
+			with open(name, "w") as f:
+				f.write("")
+
+create_file("./categories.txt")
 
 while True:
 	print('''

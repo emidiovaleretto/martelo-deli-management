@@ -1,5 +1,4 @@
-from DAO import  DaoCategory, DaoSales
-from models import Product, Category, Client, Employee, Sales, Stock
+from DAO import  DaoCategory
 
 class ControllerCategory:
 
