@@ -31,7 +31,7 @@ class DaoEmployee:
 						 f"{employee.employee_number}\n")
 
 	@classmethod
-	def read(cls, employee: Employee):
+	def read(cls):
 		with open("employees.txt", "r") as f:
 			cls.employees = f.readlines()
 		cls.employees = list(map(lambda x: x.replace('\n', ''), cls.employees))
@@ -97,7 +97,7 @@ class DaoStock:
 						 f"In Stock: {product.product_stock}\n")
 
 	@classmethod
-	def read(cls, product: Product):
+	def read(cls):
 		with open("stock.txt", "r") as f:
 			cls.stock = f.readlines()
 
