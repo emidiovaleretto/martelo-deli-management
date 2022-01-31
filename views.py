@@ -1,24 +1,29 @@
 from controller import ControllerCategory
 from DAO import DaoCategory
+from random import randint
+from category import category
+
+def generate_number(param):
+	''' Generates a random number between 
+		1.000 and 5.000 for Client instances and
+		10.000 and 50.000 for Employee instances. '''
+
+	if param == "client":
+		return randint(1_000, 5_000)
+	elif param == "employee":
+		return randint(10_000, 50_000)
 
 
 while True:
-	user_choice = int(input("Enter 1 for register a new category, 2 for view all categories, 3 for remove a category or 0 to exit: "))
+	print('''
+[1] Register a new category
+[2] Exit
+	''')
+	user_choice = int(input(">> "))
 
 	if user_choice == 1:
-		category_name = input("Enter the name of the category: ")
-		ControllerCategory.register_new_category(category_name)
-
+		category()
 	elif user_choice == 2:
-		categories = DaoCategory.read()
-		for category in categories:
-			print(category.category_name)
-
-	elif user_choice == 3:
-		category_to_remove = input("Enter the name of the category to remove: ")
-		ControllerCategory.remove_category(category_to_remove)
-
-	elif user_choice == 0:
 		break
-
+	
 print("You left the application.")
