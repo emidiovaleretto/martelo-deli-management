@@ -1,4 +1,5 @@
 from DAO import  DaoCategory
+from models import Category
 
 class ControllerCategory:
 
@@ -41,36 +42,37 @@ class ControllerCategory:
 		response = DaoCategory.read()
 		categories = list(filter(lambda x: x.category_name == category_to_update, response))
 
-		if len(categories) <= 0:
-			print("Category not found!")
+		if len(categories) > 0:
+			cat = list(filter(lambda x: x.category_name == new_category, response))
+			if len(cat) == 0:
+				response = list(map(lambda x: Category(new_category) if x.category_name == category_to_update else x, response))
+				print("Category updated successfully!")
+			else:
+				print("Category already exists. Please, choose another name.")
 		else:
-			for i in range(len(response)):
-				if response[i].category_name == category_to_update:
-					response[i].category_name = new_category
-					break
-			print("Category updated successfully!")
+			print("Category not found!")
 
-			with open("categories.txt", "w") as f:
-				for i in response:
-					f.writelines(f"{i.category_name}\n")
+		with open("categories.txt", "w") as f:
+			for i in response:
+				f.writelines(f"{i.category_name}\n")
 	
 	def remove_category(category_to_remove):
 
 		''' This method will remove a category from the system 
 			and will remove it from the categories.txt file. '''
 
-		data = DaoCategory.read()
-		categories = list(filter(lambda x: x.category_name == category_to_remove, data))
+		response = DaoCategory.read()
+		categories = list(filter(lambda x: x.category_name == category_to_remove, response))
 
 		if len(categories) <= 0:
 			print("Category not found!")
 		else:	
-			for i in range(len(data)):
-				if data[i].category_name == category_to_remove:
-					del data[i]
+			for i in range(len(response)):
+				if response[i].category_name == category_to_remove:
+					del response[i]
 					break
 			print("Removed category successfully!")
 
 			with open("categories.txt", "w") as f:
-				for i in data:
+				for i in response:
 					f.writelines(f"{i.category_name}\n")
