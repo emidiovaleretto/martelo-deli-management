@@ -1,5 +1,5 @@
 from DAO import  DaoCategory
-from models import Category
+from models import Category, Product
 
 class ControllerCategory:
 
@@ -29,7 +29,7 @@ class ControllerCategory:
 
 		response = DaoCategory.read()
 
-		if len(response) <= 0:
+		if len(response) == 0:
 			print("There are no categories in the system!")
 		else:
 			for category in response:
@@ -76,3 +76,10 @@ class ControllerCategory:
 			with open("categories.txt", "w") as f:
 				for i in response:
 					f.writelines(f"{i.category_name}\n")
+
+class ControllerStock:
+	
+	def create_stock(product: Product, n_product_stock: int):
+		'''This function creates a stock for a given 
+		   product and returns the quantity.'''
+		...
