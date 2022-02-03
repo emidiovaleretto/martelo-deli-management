@@ -22,6 +22,19 @@ class ControllerClient:
 		else:
 			print(f"It seems that the client name OR the client number you want to register is already in use. \nCheck the those data and try again.")
 
+	def read_clients(self):
+		'''This method will read the clients.txt file and
+		   return a list of client instances'''
+
+		clients = DaoClient.read()
+		
+		if len(clients) == 0:
+			print("There are no clients registered yet.")
+		else:
+			for client in clients:
+				print(f"Name: {client.name}\n"
+					  f"Email: {client.email}\n"
+				      f"Client number: {client.client_number}\n")
 
 class ControllerCategory:
 
