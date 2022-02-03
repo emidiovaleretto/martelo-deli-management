@@ -36,6 +36,27 @@ class ControllerClient:
 					  f"Email: {client.email}\n"
 				      f"Client number: {client.client_number}\n")
 
+	def update_client(self, client_number, email_to_update, new_email):
+		'''This method will update the client email 
+		   in the clients.txt file'''
+
+		clients = DaoClient.read()
+
+		clt_number = list(filter(lambda x: int(x.client_number) == client_number, clients))
+
+		if clt_number:
+			clients = list(map(lambda x: Client(x.name, new_email, x.client_number) if x.email == email_to_update else x, clients))
+			print("Client email updated successfully!")
+		else:
+			print(f"Client number {client_number} not found.")
+
+		with open("clients.txt", "w") as f:
+			for client in clients:
+				f.writelines(f"{client.name} | "
+						  	 f"{client.email} | "	
+						 	 f"{client.client_number}\n")
+		
+
 class ControllerCategory:
 
 	def register_new_category(category):
