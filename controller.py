@@ -1,5 +1,27 @@
-from DAO import  DaoCategory
-from models import Category, Product
+from DAO import DaoClient, DaoCategory
+from models import Category, Client
+
+
+class ControllerClient:
+
+	def create_new_client(self, client):
+		'''This method will create a new client instance and
+		   save it to the cliets.txt file'''
+
+		exists = False
+
+		response = DaoClient.read()
+
+		for clt in response:
+			if int(clt.client_number) == client.client_number or clt.name == client.name:
+				exists = True
+		
+		if not exists:
+			DaoClient.save(client)
+			print("Client saved successfully!")
+		else:
+			print(f"It seems that the client name OR the client number you want to register is already in use. \nCheck the those data and try again.")
+
 
 class ControllerCategory:
 
@@ -76,10 +98,3 @@ class ControllerCategory:
 			with open("categories.txt", "w") as f:
 				for i in response:
 					f.writelines(f"{i.category_name}\n")
-
-class ControllerStock:
-	
-	def create_stock(product: Product, n_product_stock: int):
-		'''This function creates a stock for a given 
-		   product and returns the quantity.'''
-		...

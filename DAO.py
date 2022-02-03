@@ -17,8 +17,7 @@ class DaoClient:
 		cls.client_data = list(map(lambda x: x.replace('\n', ''), cls.client_data))
 		cls.client_data = list(map(lambda x: x.split(' | '), cls.client_data))
 		
-		client_data = [Client(client) for client in cls.client_data]
-
+		client_data = [Client(client[0], client[1], client[2]) for client in cls.client_data]
 		return client_data	
 
 class DaoEmployee:
