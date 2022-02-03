@@ -40,21 +40,46 @@ class ControllerClient:
 		'''This method will update the client email 
 		   in the clients.txt file'''
 
-		clients = DaoClient.read()
+		response = DaoClient.read()
 
-		clt_number = list(filter(lambda x: int(x.client_number) == client_number, clients))
+		clt_number = list(filter(lambda x: int(x.client_number) == client_number, response))
 
 		if clt_number:
-			clients = list(map(lambda x: Client(x.name, new_email, x.client_number) if x.email == email_to_update else x, clients))
+			response = list(map(lambda x: Client(x.name, new_email, x.client_number) if x.email == email_to_update else x, response))
 			print("Client email updated successfully!")
 		else:
 			print(f"Client number {client_number} not found.")
 
 		with open("clients.txt", "w") as f:
-			for client in clients:
+			for client in response:
 				f.writelines(f"{client.name} | "
 						  	 f"{client.email} | "	
 						 	 f"{client.client_number}\n")
+
+	def remove_client(self, client_to_remove):
+		'''This method will remove a client as per the client_number 
+			and will remove it from the clients.txt file.'''
+
+		response = DaoClient.read()
+
+		client = list(filter(lambda x: int(x.client_number) == client_to_remove, response))
+		print()
+
+		if len(client) == 0:
+			print("Client not found.")
+		else:
+			for i in range(len(response)):
+				if int(response[i].client_number) == client_to_remove:
+					del response[i]
+					print(f"Client {client[0].name.upper()} removed successfully!")
+					break
+
+			with open("clients.txt", "w") as f:
+				for client in response:
+					f.writelines(f"{client.name} | "
+								 f"{client.email} | "	
+								 f"{client.client_number}\n")
+
 		
 
 class ControllerCategory:
